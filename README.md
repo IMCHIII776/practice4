@@ -34,7 +34,7 @@ Debug 不依赖任何 secrets。若手机已安装相同包名但签名不同的
 
 触发条件：push 到 main/develop、面向 main 的 PR、手动触发。
 
-步骤：Checkout → JDK 17 → Gradle 缓存 → 安装指定 SDK → chmod → `lintDebug assembleDebug` → 上传 APK 和 lint 报告。
+步骤：Checkout → JDK 17 → Gradle 缓存 → 安装指定 SDK → chmod → `lintDebug assembleDebug` → apksigner 签名验证 → 上传 APK 和 lint 报告。
 
 APK 路径：`app/build/outputs/apk/debug/app-debug.apk`。保留 7 天；上传路径找不到文件时直接失败。
 非 main 引用的缓存只读，PR 不写入共享缓存。
@@ -76,7 +76,7 @@ git tag v1.0.0
 git push origin v1.0.0
 ```
 
-步骤：Checkout → JDK/缓存/SDK → lintRelease → 检查四个 secrets → 解码密钥到 RUNNER_TEMP → assembleRelease → apksigner verify → 上传 app-release → 始终清理临时密钥。
+步骤：Checkout → JDK/缓存/SDK → 检查四个 secrets → 解码密钥到 RUNNER_TEMP → lintRelease assembleRelease → apksigner verify → 上传 app-release → 始终清理临时密钥。
 
 APK 路径：`app/build/outputs/apk/release/app-release.apk`，保留 14 天。普通分支 push 不运行 Release；缺少 secrets 会明确失败，不能产出冒充签名版的 unsigned APK。
 标签本身不会修改 Android 的版本信息；后续正式升级要先修改 `app/build.gradle` 中的 versionCode 和 versionName。
