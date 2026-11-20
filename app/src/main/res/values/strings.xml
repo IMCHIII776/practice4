@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Practice 4</string>
+    <string name="eyebrow">DATA ENGINEERING · PRACTICE 04</string>
+    <string name="title">Build. Install. Tap.</string>
+    <string name="description">An offline counter built with Android and delivered through GitHub Actions. Your count is saved on this device.</string>
+    <string name="counter_value">%1$d</string>
+    <string name="increment">Add one</string>
+    <string name="reset">Reset counter</string>
+    <string name="footer">Tap to test your APK. Close and reopen the app to check that your count is saved.</string>
+</resources>
